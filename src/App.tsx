@@ -50,7 +50,7 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          {['Services', 'About', 'Fleet', 'FAQ'].map((item) => (
+          {['Services', 'About', 'Fleet', 'Blog', 'FAQ'].map((item) => (
             <a 
               key={item} 
               href={`#${item.toLowerCase()}`}
@@ -89,7 +89,7 @@ const Navbar = () => {
             className="absolute top-full left-0 right-0 bg-white border-t border-slate-100 p-6 md:hidden shadow-2xl"
           >
             <div className="flex flex-col gap-4">
-              {['Services', 'About', 'Fleet', 'FAQ'].map((item) => (
+              {['Services', 'About', 'Fleet', 'Blog', 'FAQ'].map((item) => (
                 <a 
                   key={item} 
                   href={`#${item.toLowerCase()}`}
@@ -394,6 +394,87 @@ const ServicesGrid = () => {
   );
 };
 
+const BlogSection = () => {
+  const posts = [
+    {
+      title: "Winter Road Safety: Essential Tips for Premium Vehicles",
+      date: "Mar 15, 2026",
+      category: "Safety",
+      image: "https://images.unsplash.com/photo-1483664852095-d6cc6870702d?auto=format&fit=crop&q=80&w=800",
+      desc: "Protect your high-performance engine and tires during the harshest winter conditions."
+    },
+    {
+      title: "The Future of Roadside Assistance: AI and Live Tracking",
+      date: "Mar 10, 2026",
+      category: "Technology",
+      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
+      desc: "How Recovero is utilizing predictive dispatching to reduce response times by 40%."
+    },
+    {
+      title: "Maintaining Your Luxury Fleet: A Professional Guide",
+      date: "Mar 05, 2026",
+      category: "Maintenance",
+      image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800",
+      desc: "Expert advice on keeping your high-end vehicles in showroom condition year-round."
+    }
+  ];
+
+  return (
+    <section id="blog" className="py-32 bg-slate-950 border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+          <div className="max-w-xl">
+            <h2 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter mb-6 leading-none">
+              Rescue <span className="text-safety-orange">Insights</span>
+            </h2>
+            <p className="text-white/40 uppercase tracking-widest text-sm font-bold">
+              Expert advice, industry news, and recovery stories.
+            </p>
+          </div>
+          <button className="text-safety-orange font-black uppercase tracking-widest text-sm flex items-center gap-2 hover:gap-4 transition-all group">
+            View All Posts <span className="text-xl">→</span>
+          </button>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {posts.map((post, i) => (
+            <motion.div
+              key={i}
+              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group cursor-pointer"
+            >
+              <div className="relative aspect-[16/10] mb-6 overflow-hidden rounded-sm">
+                <img 
+                  src={post.image} 
+                  alt={post.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute top-4 left-4 bg-safety-orange text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
+                  {post.category}
+                </div>
+              </div>
+              <div className="text-xs font-bold text-white/30 uppercase tracking-widest mb-3">
+                {post.date}
+              </div>
+              <h3 className="text-2xl font-black uppercase tracking-tight mb-4 group-hover:text-safety-orange transition-colors">
+                {post.title}
+              </h3>
+              <p className="text-white/40 text-sm leading-relaxed mb-6">
+                {post.desc}
+              </p>
+              <div className="w-12 h-1 bg-white/10 group-hover:w-full group-hover:bg-safety-orange transition-all duration-500" />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -484,7 +565,7 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-black uppercase tracking-widest mb-8 text-safety-orange">Quick Links</h4>
             <ul className="space-y-4">
-              {['Services', 'About', 'Fleet', 'FAQ'].map(link => (
+              {['Services', 'About', 'Fleet', 'Blog', 'FAQ'].map(link => (
                 <li key={link}>
                   <a href="#" className="text-sm font-bold uppercase text-white/60 hover:text-white transition-colors">{link}</a>
                 </li>
@@ -547,6 +628,7 @@ export default function App() {
       <StatsGrid />
       <WhyChooseUs />
       <ServicesGrid />
+      <BlogSection />
       <FAQ />
       <Footer />
       <EmergencyCTA />
